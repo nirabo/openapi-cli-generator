@@ -5,7 +5,6 @@ including adding, updating, and removing API aliases.
 """
 
 import json
-import os
 from pathlib import Path
 
 
@@ -14,11 +13,13 @@ class Config:
 
     def __init__(self, config_dir=None):
         """Initialize the configuration manager.
-        
+
         Args:
             config_dir (Path, optional): Override default config directory for testing.
         """
-        self.config_dir = Path(config_dir) if config_dir else Path.home() / ".openapi_cli_generator"
+        self.config_dir = (
+            Path(config_dir) if config_dir else Path.home() / ".openapi_cli_generator"
+        )
         self.config_file = self.config_dir / "config.json"
         self._ensure_config_exists()
         self.load_config()
@@ -31,7 +32,7 @@ class Config:
             default_config = {
                 "aliases": {},
                 "version": "1.0.0",
-                "created_at": None  # Will be set on first alias addition
+                "created_at": None,  # Will be set on first alias addition
             }
             with open(self.config_file, "w") as f:
                 json.dump(default_config, f, indent=2)
@@ -40,7 +41,7 @@ class Config:
         """Load configuration from file."""
         with open(self.config_file) as f:
             self.config = json.load(f)
-            
+
         # Ensure basic structure exists
         if "aliases" not in self.config:
             self.config["aliases"] = {}
@@ -50,13 +51,14 @@ class Config:
         """Save configuration to file."""
         # Create backup before saving
         if self.config_file.exists():
-            backup_file = self.config_file.with_suffix('.json.bak')
+            backup_file = self.config_file.with_suffix(".json.bak")
             try:
                 import shutil
+
                 shutil.copy2(self.config_file, backup_file)
             except Exception:
                 pass  # Ignore backup errors
-                
+
         with open(self.config_file, "w") as f:
             json.dump(self.config, f, indent=2)
 
