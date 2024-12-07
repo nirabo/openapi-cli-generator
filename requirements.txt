@@ -1,0 +1,4 @@
+pyyaml>=6.0
+requests>=2.31.0
+openapi-spec-validator>=0.5.1
+click>=8.1.3
