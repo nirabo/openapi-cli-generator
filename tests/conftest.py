@@ -4,6 +4,7 @@ import json
 import os
 
 import pytest
+import requests
 
 
 @pytest.fixture
@@ -45,6 +46,6 @@ def mock_response():
 
         def raise_for_status(self):
             if self.status_code >= 400:
-                raise Exception(f"HTTP Error: {self.status_code}")
+                raise requests.exceptions.HTTPError(f"HTTP Error: {self.status_code}")
 
     return MockResponse
