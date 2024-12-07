@@ -13,9 +13,9 @@ The OpenAPI CLI Generator is a sophisticated command-line tool designed to trans
 - Maintains parameter types and validation rules
 
 ### 2. Command Structure
-- Root command: `openapi-cli`
-- Alias-based API management: `openapi-cli alias <command>`
-- API-specific commands: `openapi-cli <alias> <endpoint> <action>`
+- Root command: `openapi-cli-generator`
+- Alias-based API management: `openapi-cli-generator alias <command>`
+- API-specific commands: `openapi-cli-generator <alias> <endpoint> <action>`
 - Consistent help system: `--help` available at every level
 
 ### 3. Configuration Management
